@@ -102,6 +102,8 @@
       "prettier/react"
     ],
     "rules": {
+      "linebreak-style": ["error", "unix"],
+      "semi": ["error", "never"],
       "prettier/prettier": [
         "error",
         {
