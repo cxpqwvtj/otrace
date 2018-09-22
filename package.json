@@ -110,5 +110,10 @@
         }
       ]
     }
-  }
+  },
+  "eslintIgnore": [
+    "build/**",
+    "node_modules/**",
+    "web/src/main/resources/static/**"
+  ]
 }
