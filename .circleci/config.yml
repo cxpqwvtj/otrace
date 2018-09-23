@@ -39,3 +39,9 @@ jobs:
           paths:
             - ~/.gradle
           key: otrace-web-dependencies-{{ checksum "build.gradle" }}
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build_client
+      - build_server
