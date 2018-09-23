@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build_client:
     docker:
       - image: circleci/node:10.11
     working_directory: ~/workspace
@@ -8,14 +8,14 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - otrace-client-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          - otrace-client-dependencies-
       - run:
           name: yarn-install
           command: yarn install
       - save_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: otrace-client-dependencies-{{ checksum "package.json" }}
           paths:
             - ./node_modules
       - run:
@@ -24,3 +24,18 @@ jobs:
       - run:
           name: yarn-build
           command: yarn build
+  build_server:
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+    working_directory: ~/workspace
+    steps:
+      - checkout
+      - restore_cache:
+          key: otrace-web-dependencies-{{ checksum "build.gradle" }}
+      - run:
+          name: web-build
+          command: ./gradlew clean build
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: otrace-web-dependencies-{{ checksum "build.gradle" }}
