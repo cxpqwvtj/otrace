@@ -19,5 +19,8 @@ jobs:
           paths:
             - ./node_modules
       - run:
+          name: yarn-eslint
+          command: yarn eslint
+      - run:
           name: yarn-build
           command: yarn build
