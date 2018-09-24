@@ -34,7 +34,7 @@ jobs:
           key: otrace-web-dependencies-{{ checksum "build.gradle" }}
       - run:
           name: web-build
-          command: ./gradlew clean build
+          command: ./gradlew build
       - save_cache:
           paths:
             - ~/.gradle
